@@ -593,59 +593,101 @@ body.is-open .hero-divider    { animation-delay: 0.75s; }
     margin-bottom: clamp(0.45rem, 1.7vw, 0.62rem);
 }
 
-.invitation-event {
-    margin-top: clamp(0.62rem, 2.6vw, 1rem);
+.invitation-event-details {
+    margin-top: clamp(0.65rem, 2.65vw, 1.05rem);
     display: grid;
-    gap: 0.14rem;
+    justify-items: center;
+    gap: 0.16rem;
+    position: relative;
 }
 
-.invitation-event__line {
+.invitation-event-details::before {
+    content: "";
+    width: clamp(74px, 23vw, 108px);
+    height: 1px;
+    margin-bottom: 0.16rem;
+    background: linear-gradient(90deg, rgba(134, 103, 57, 0), rgba(134, 103, 57, 0.42), rgba(134, 103, 57, 0));
+}
+
+.event-date,
+.event-time {
     font-family: "Ovo", Georgia, serif;
-    font-size: clamp(0.7rem, 2.6vw, 0.86rem);
-    color: #7a6138;
-    letter-spacing: 0.09em;
+    font-size: clamp(0.72rem, 2.45vw, 0.9rem);
+    color: #6d5531;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    line-height: 1.3;
+    line-height: 1.28;
 }
 
-.invitation-event__line:nth-child(-n + 2) {
-    font-family: var(--font-display);
-    letter-spacing: 0.12em;
+.event-time {
+    margin-bottom: 0.18rem;
 }
 
-.invitation-event__venue {
-    margin-top: 0.28rem;
-}
-
-.invitation-event__senakunja {
-    font-family: var(--font-cursive);
-    font-style: normal;
-    font-size: clamp(1.52rem, 5.9vw, 2.18rem);
+.event-location-main {
+    font-family: "weddingday", "Beau Rivage", cursive;
+    font-size: clamp(1.45rem, 5.2vw, 2.18rem);
     color: #866739;
-    letter-spacing: 0.015em;
-    text-transform: none;
-    line-height: 1.05;
+    line-height: 1;
+    position: relative;
     display: inline-block;
-    animation: senakunjaGlow 4.6s ease-in-out infinite;
+    text-shadow: 0 0 0.5px rgba(134, 103, 57, 0.45);
+    animation: senakunjaGlow 4.5s ease-in-out infinite;
+    overflow: hidden;
+    padding-inline: 0.06em;
 }
 
-.invitation-event__cantonment {
-    display: inline-block;
-    margin-top: 0.18rem;
-    font-family: var(--font-display);
-    font-size: clamp(0.74rem, 2.65vw, 0.9rem);
-    letter-spacing: 0.12em;
+.event-location-main::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        110deg,
+        transparent 0%,
+        transparent 35%,
+        rgba(255, 239, 184, 0.65) 48%,
+        rgba(255, 255, 255, 0.75) 50%,
+        rgba(255, 239, 184, 0.35) 54%,
+        transparent 68%,
+        transparent 100%
+    );
+    transform: translateX(-120%);
+    animation: senakunjaShimmer 5.2s ease-in-out infinite;
+    mix-blend-mode: screen;
+    pointer-events: none;
+}
+
+.event-location-sub {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(0.78rem, 2.4vw, 0.95rem);
+    color: #454545;
+    line-height: 1.25;
+    font-style: normal;
+    letter-spacing: 0.02em;
 }
 
 @keyframes senakunjaGlow {
     0%,
     100% {
-        transform: translateY(0);
-        text-shadow: 0 0 0 rgba(134, 103, 57, 0);
+        filter: drop-shadow(0 0 0 rgba(197, 161, 86, 0));
     }
     50% {
-        transform: translateY(-1px);
-        text-shadow: 0 0 12px rgba(134, 103, 57, 0.2);
+        filter: drop-shadow(0 0 5px rgba(197, 161, 86, 0.32));
+    }
+}
+
+@keyframes senakunjaShimmer {
+    0%,
+    68% {
+        transform: translateX(-120%);
+        opacity: 0;
+    }
+    76% {
+        opacity: 1;
+    }
+    92%,
+    100% {
+        transform: translateX(120%);
+        opacity: 0;
     }
 }
 
@@ -1480,5 +1522,10 @@ body.is-open .audio-toggle {
     .sparkle {
         animation: none !important;
         opacity: 0.16 !important;
+    }
+
+    .event-location-main,
+    .event-location-main::after {
+        animation: none !important;
     }
 }
