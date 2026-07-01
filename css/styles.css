@@ -871,25 +871,25 @@ body.is-open .hero-divider    { animation-delay: 0.75s; }
     width: min(100%, 430px);
     margin: 0 auto;
     display: grid;
-    gap: clamp(0.5rem, 2.2vw, 0.88rem);
+    gap: clamp(0.75rem, 2.8vw, 1.15rem);
     justify-items: center;
 }
 
 .dress-code-note {
     font-family: "Ovo", Georgia, serif;
     font-size: clamp(0.82rem, 3.05vw, 0.98rem);
-    line-height: 1.62;
+    line-height: 1.72;
     color: #5f5037;
     max-width: 34ch;
 }
 
 .dress-code-copy h3 {
-    font-family: var(--font-display);
-    font-size: clamp(1.02rem, 4vw, 1.28rem);
+    font-family: var(--font-cursive);
+    font-size: clamp(1.7rem, 6.7vw, 2.35rem);
     font-weight: 400;
     color: #866739;
-    letter-spacing: 0.09em;
-    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    line-height: 1.05;
 }
 
 .palette-row {
@@ -897,7 +897,7 @@ body.is-open .hero-divider    { animation-delay: 0.75s; }
     margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: clamp(0.42rem, 2vw, 0.86rem);
+    gap: clamp(0.2rem, 1.1vw, 0.45rem);
 }
 
 .palette-item {
@@ -928,6 +928,35 @@ body.is-open .hero-divider    { animation-delay: 0.75s; }
     text-transform: uppercase;
 }
 
+.dress-code-guidance {
+    width: min(100%, 420px);
+    margin-top: clamp(0.3rem, 1.5vw, 0.6rem);
+    display: grid;
+    gap: clamp(0.6rem, 2.1vw, 0.95rem);
+}
+
+.dress-code-guidance h4 {
+    font-family: var(--font-cursive);
+    font-size: clamp(1.45rem, 5.8vw, 1.95rem);
+    font-weight: 400;
+    color: #866739;
+    letter-spacing: 0.02em;
+    line-height: 1.02;
+}
+
+.dress-code-guidance p {
+    font-family: "Ovo", Georgia, serif;
+    font-size: clamp(0.8rem, 2.95vw, 0.95rem);
+    line-height: 1.72;
+    color: #5f5037;
+    max-width: 34ch;
+    margin: 0 auto;
+}
+
+.dress-code-guidance p + h4 {
+    margin-top: clamp(0.25rem, 1vw, 0.45rem);
+}
+
 @media (max-width: 359px) {
     .palette-row {
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -940,6 +969,147 @@ body.is-open .hero-divider    { animation-delay: 0.75s; }
     .dress-code-copy,
     .palette-row {
         width: min(100%, 520px);
+    }
+}
+
+/* ============================================================
+   RSVP section (static placeholder)
+   ============================================================ */
+.rsvp-section {
+    max-width: none;
+    margin: 0;
+    padding: clamp(3.4rem, 9vw, 5rem) 1rem clamp(4.2rem, 10vw, 5.9rem);
+    text-align: center;
+    background: transparent;
+    overflow-x: hidden;
+}
+
+.rsvp-section .section-heading {
+    margin-bottom: clamp(0.65rem, 2.5vw, 1rem);
+}
+
+.rsvp-intro {
+    width: min(100%, 420px);
+    margin: 0 auto clamp(1rem, 3.7vw, 1.5rem);
+    font-family: "Ovo", Georgia, serif;
+    font-size: clamp(0.84rem, 3.1vw, 0.99rem);
+    line-height: 1.65;
+    color: #5f5037;
+}
+
+.rsvp-form {
+    width: min(100%, 430px);
+    margin: 0 auto;
+    display: grid;
+    gap: clamp(0.78rem, 3vw, 1.08rem);
+    text-align: left;
+}
+
+.rsvp-field {
+    display: grid;
+    gap: 0.34rem;
+}
+
+.rsvp-field > span,
+.rsvp-choice legend {
+    font-family: var(--font-display);
+    font-size: clamp(0.84rem, 3vw, 0.96rem);
+    color: #866739;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+}
+
+.rsvp-field input {
+    width: 100%;
+    min-height: 44px;
+    border-radius: 0.7rem;
+    border: 1px solid rgba(172, 151, 120, 0.95);
+    background: rgba(249, 230, 212, 0.62);
+    color: #3d3020;
+    font-family: "Ovo", Georgia, serif;
+    font-size: clamp(0.9rem, 3.2vw, 1rem);
+    padding: 0.62rem 0.82rem;
+    outline: none;
+    transition: border-color 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
+}
+
+.rsvp-field input:focus-visible {
+    border-color: #866739;
+    box-shadow: 0 0 0 2px rgba(134, 103, 57, 0.16);
+    background: rgba(249, 230, 212, 0.78);
+}
+
+.rsvp-field input::placeholder {
+    color: #8f7857;
+}
+
+.rsvp-choice {
+    border: 1px solid rgba(172, 151, 120, 0.76);
+    border-radius: 0.78rem;
+    background: rgba(249, 230, 212, 0.42);
+    padding: 0.72rem 0.82rem 0.84rem;
+}
+
+.rsvp-choice legend {
+    padding: 0 0.25rem;
+}
+
+.rsvp-choice label {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    min-height: 44px;
+    font-family: "Ovo", Georgia, serif;
+    font-size: clamp(0.86rem, 3.1vw, 0.98rem);
+    color: #4b3b27;
+}
+
+.rsvp-choice input[type="radio"] {
+    width: 1.05rem;
+    height: 1.05rem;
+    accent-color: #866739;
+    flex: 0 0 auto;
+}
+
+.rsvp-submit {
+    min-height: 44px;
+    border-radius: 0.74rem;
+    border: 1px solid rgba(134, 103, 57, 0.78);
+    background: linear-gradient(
+        to bottom,
+        rgba(249, 230, 212, 0.98) 0%,
+        rgba(236, 221, 196, 0.94) 100%
+    );
+    color: #866739;
+    font-family: var(--font-display);
+    font-size: clamp(0.93rem, 3.3vw, 1.03rem);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.rsvp-submit:hover,
+.rsvp-submit:focus-visible {
+    opacity: 0.9;
+    transform: translateY(-1px);
+    outline: none;
+}
+
+.rsvp-success {
+    font-family: "Ovo", Georgia, serif;
+    font-size: clamp(0.84rem, 3vw, 0.97rem);
+    line-height: 1.6;
+    color: #6e5a3a;
+    text-align: center;
+    margin-top: 0.2rem;
+    padding: 0.45rem 0.2rem 0;
+}
+
+@media (min-width: 1025px) {
+    .rsvp-form,
+    .rsvp-intro {
+        width: min(100%, 430px);
     }
 }
 

@@ -206,8 +206,39 @@
         }, 1000);
     }
 
+    function setupRsvpStatic() {
+        const rsvpForm = document.getElementById("rsvp-form");
+        const rsvpSuccess = document.getElementById("rsvp-success");
+
+        if (!rsvpForm || !rsvpSuccess) {
+            return;
+        }
+
+        const submitButton = rsvpForm.querySelector("button[type='submit']");
+        const defaultLabel = submitButton ? submitButton.textContent : "";
+
+        rsvpForm.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            if (!rsvpForm.checkValidity()) {
+                rsvpForm.reportValidity();
+                return;
+            }
+
+            rsvpSuccess.hidden = false;
+
+            if (submitButton && defaultLabel) {
+                submitButton.textContent = "Submitted";
+                window.setTimeout(function () {
+                    submitButton.textContent = defaultLabel;
+                }, 2200);
+            }
+        });
+    }
+
     setupScrollReveal();
     setupCountdown();
+    setupRsvpStatic();
 
     // Audio toggle wiring (button stays hidden until the site opens).
     if (audioToggle && music) {

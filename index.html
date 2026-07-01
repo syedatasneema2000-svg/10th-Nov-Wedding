@@ -237,7 +237,7 @@
 
                 <div class="dress-code-copy reveal-on-scroll">
                     <p class="dress-code-note">
-                        Your presence in elegant evening attire would beautifully complement the celebration.
+                        We kindly invite you to dress in elegant attire that reflects the style and spirit of our special day.
                     </p>
 
                     <h3>Color Palette</h3>
@@ -256,12 +256,70 @@
                             <span>Black</span>
                         </div>
                     </div>
+
+                    <div class="dress-code-guidance" aria-label="Dress code guidance">
+                        <h4>Ladies</h4>
+                        <p>Formal dresses in elegant, polished styles are encouraged.</p>
+
+                        <h4>Gentlemen</h4>
+                        <p>Well-tailored suits with classic dress shoes are preferred.</p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Step 8+ : RSVP (static only; no API yet) -->
-        <section class="section section--rsvp" aria-label="RSVP"></section>
+        <!-- Step 8 : RSVP (static placeholder only) -->
+        <section id="rsvp" class="rsvp-section section" aria-labelledby="rsvp-title">
+            <div class="section-heading reveal-on-scroll">
+                <h2 id="rsvp-title">RSVP</h2>
+                <img
+                    class="section-heading__divider"
+                    src="assets/ornaments/line-divider2.png"
+                    alt=""
+                    aria-hidden="true"
+                    onerror="this.src='assets/ornaments/divider-gold-flourish.svg'"
+                />
+            </div>
+
+            <p class="rsvp-intro reveal-on-scroll">Kindly let us know if you will be joining us.</p>
+
+            <form class="rsvp-form reveal-on-scroll" id="rsvp-form" novalidate>
+                <label class="rsvp-field">
+                    <span>Full Name</span>
+                    <input type="text" name="name" autocomplete="name" required />
+                </label>
+
+                <label class="rsvp-field">
+                    <span>Phone Number</span>
+                    <input type="tel" name="phone" autocomplete="tel" required />
+                </label>
+
+                <label class="rsvp-field">
+                    <span>Number of Guests</span>
+                    <input type="number" name="guests" min="1" max="10" value="1" required />
+                </label>
+
+                <fieldset class="rsvp-choice">
+                    <legend>Will you be attending?</legend>
+
+                    <label>
+                        <input type="radio" name="attendance" value="yes" required />
+                        <span>Yes, I will attend</span>
+                    </label>
+
+                    <label>
+                        <input type="radio" name="attendance" value="no" />
+                        <span>Sorry, I cannot attend</span>
+                    </label>
+                </fieldset>
+
+                <button type="submit" class="rsvp-submit">Submit RSVP</button>
+
+                <p class="rsvp-success" id="rsvp-success" hidden>
+                    Thank you. Your response has been noted for now.
+                </p>
+            </form>
+        </section>
 
         <!-- Step 9+ : closing -->
         <section class="section section--closing" aria-label="Closing"></section>
