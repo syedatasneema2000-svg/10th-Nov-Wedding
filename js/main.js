@@ -236,9 +236,43 @@
         });
     }
 
+    function setupSparkleLayer() {
+        const sparkleLayer = document.querySelector(".sparkle-layer");
+        if (!sparkleLayer) {
+            return;
+        }
+
+        const sparkleCount = 46;
+        const fragment = document.createDocumentFragment();
+
+        for (let i = 0; i < sparkleCount; i += 1) {
+            const sparkle = document.createElement("span");
+            sparkle.className = "sparkle";
+
+            const left = (Math.random() * 100).toFixed(2);
+            const top = (Math.random() * 100).toFixed(2);
+            const size = (1 + Math.random() * 2).toFixed(2);
+            const duration = (3 + Math.random() * 4).toFixed(2);
+            const delay = (Math.random() * 6).toFixed(2);
+            const alpha = (0.24 + Math.random() * 0.34).toFixed(2);
+
+            sparkle.style.left = left + "%";
+            sparkle.style.top = top + "%";
+            sparkle.style.setProperty("--sparkle-size", size + "px");
+            sparkle.style.setProperty("--sparkle-duration", duration + "s");
+            sparkle.style.setProperty("--sparkle-delay", delay + "s");
+            sparkle.style.setProperty("--sparkle-alpha", alpha);
+
+            fragment.appendChild(sparkle);
+        }
+
+        sparkleLayer.appendChild(fragment);
+    }
+
     setupScrollReveal();
     setupCountdown();
     setupRsvpStatic();
+    setupSparkleLayer();
 
     // Audio toggle wiring (button stays hidden until the site opens).
     if (audioToggle && music) {
