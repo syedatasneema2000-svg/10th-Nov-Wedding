@@ -275,7 +275,7 @@ body.is-open .envelope-gate {
 .sparkle-layer {
     position: fixed;
     inset: 0;
-    z-index: 1;
+    z-index: 30;
     pointer-events: none;
     overflow: hidden;
     opacity: 0;
@@ -283,26 +283,29 @@ body.is-open .envelope-gate {
 }
 
 body.is-open .sparkle-layer {
-    opacity: 0.78;
+    opacity: 0.96;
 }
 
 .sparkle {
     position: absolute;
     left: 0;
     top: 0;
-    width: var(--sparkle-size, 2px);
-    height: var(--sparkle-size, 2px);
+    width: var(--sparkle-size, 2.8px);
+    height: var(--sparkle-size, 2.8px);
     border-radius: 50%;
     background: radial-gradient(
         circle,
-        rgba(255, 231, 167, 0.95),
-        rgba(178, 133, 58, 0.25) 55%,
-        transparent 72%
+        rgba(255, 249, 225, 0.98) 0%,
+        rgba(255, 233, 171, 0.95) 32%,
+        rgba(193, 146, 65, 0.56) 58%,
+        transparent 82%
     );
-    opacity: var(--sparkle-alpha, 0.46);
+    opacity: var(--sparkle-alpha, 0.68);
     box-shadow:
-        0 0 4px rgba(255, 232, 170, 0.45),
-        0 0 10px rgba(197, 161, 86, 0.2);
+        0 0 5px rgba(255, 241, 194, 0.68),
+        0 0 14px rgba(211, 165, 78, 0.44),
+        0 0 24px rgba(255, 255, 255, 0.22);
+    mix-blend-mode: screen;
     animation: sparkleTwinkle var(--sparkle-duration, 5.5s)
         ease-in-out var(--sparkle-delay, 0s) infinite;
 }
@@ -310,15 +313,15 @@ body.is-open .sparkle-layer {
 @keyframes sparkleTwinkle {
     0%,
     100% {
-        opacity: 0.05;
+        opacity: 0.16;
         transform: scale(0.65);
     }
     45% {
-        opacity: var(--sparkle-alpha, 0.78);
+        opacity: var(--sparkle-alpha, 0.95);
         transform: scale(1);
     }
     60% {
-        opacity: calc(var(--sparkle-alpha, 0.72) * 0.42);
+        opacity: calc(var(--sparkle-alpha, 0.95) * 0.52);
         transform: scale(0.82);
     }
 }
