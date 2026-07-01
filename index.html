@@ -197,33 +197,68 @@
             </div>
 
             <div class="venue-content reveal-on-scroll">
-                <figure class="venue-visual reveal-on-scroll">
-                    <img
-                        src="assets/venue/Senakunjo-1.png"
-                        alt="Senakunja venue illustration"
-                    />
-                </figure>
-
                 <div class="venue-copy reveal-on-scroll">
-                    <p class="venue-kicker">
-                        <img class="venue-kicker__icon" src="assets/ornaments/locator-pin-point.png" alt="" aria-hidden="true" />
-                        Wedding Ceremony
+                    <p class="venue-pin">
+                        <img class="venue-pin__icon" src="assets/ornaments/locator-pin-point.png" alt="" aria-hidden="true" />
                     </p>
                     <h3>Senakunja</h3>
                     <p class="venue-location">Dhaka Cantonment</p>
-                    <p class="venue-note">An elegant evening celebration beneath warm lights and blessings.</p>
-                    <a
-                        class="venue-link"
-                        href="https://www.google.com/maps/search/?api=1&query=Senakunja%20Dhaka%20Cantonment"
-                        target="_blank"
-                        rel="noopener"
-                    >View Location</a>
                 </div>
+
+                <figure class="venue-visual reveal-on-scroll">
+                    <img
+                        src="assets/venue/Senakunjo-2.png"
+                        alt="Senakunja venue illustration"
+                    />
+                </figure>
             </div>
         </section>
 
-        <!-- Step 7+ : dress code -->
-        <section class="section section--dress-code" aria-label="Dress code"></section>
+        <!-- Step 7 : dress code -->
+        <section id="dress-code" class="dress-code-section section" aria-labelledby="dress-code-title">
+            <div class="section-heading reveal-on-scroll">
+                <h2 id="dress-code-title">Dress Code</h2>
+                <img
+                    class="section-heading__divider"
+                    src="assets/ornaments/line-divider2.png"
+                    alt=""
+                    aria-hidden="true"
+                    onerror="this.src='assets/ornaments/divider-gold-flourish.svg'"
+                />
+            </div>
+
+            <div class="dress-code-content reveal-on-scroll">
+                <figure class="dress-code-visual reveal-on-scroll">
+                    <img
+                        src="assets/dress-code/dress-code-guests.png"
+                        alt="Elegant wedding guest attire inspiration"
+                    />
+                </figure>
+
+                <div class="dress-code-copy reveal-on-scroll">
+                    <p class="dress-code-note">
+                        Your presence in elegant evening attire would beautifully complement the celebration.
+                    </p>
+
+                    <h3>Color Palette</h3>
+
+                    <div class="palette-row" aria-label="Dress code color palette">
+                        <div class="palette-item">
+                            <span class="palette-swatch" style="--swatch: #550000;"></span>
+                            <span>Maroon</span>
+                        </div>
+                        <div class="palette-item">
+                            <span class="palette-swatch palette-swatch--ivory" style="--swatch: #EDE8D0;"></span>
+                            <span>Ivory</span>
+                        </div>
+                        <div class="palette-item">
+                            <span class="palette-swatch" style="--swatch: #000000;"></span>
+                            <span>Black</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <!-- Step 8+ : RSVP (static only; no API yet) -->
         <section class="section section--rsvp" aria-label="RSVP"></section>

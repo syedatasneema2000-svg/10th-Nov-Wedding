@@ -700,56 +700,79 @@ body.is-open .hero-divider    { animation-delay: 0.75s; }
     padding: clamp(3.5rem, 9vw, 5rem) 1rem clamp(4.6rem, 10vw, 6.2rem);
     text-align: center;
     background: transparent;
+    overflow-x: hidden;
 }
 
 .venue-section .section-heading {
-    margin-bottom: clamp(0.85rem, 3.5vw, 1.3rem);
+    margin-bottom: clamp(0.35rem, 1.8vw, 0.7rem);
 }
 
 .venue-content {
-    width: min(100%, 520px);
+    width: min(100%, 560px);
     margin: 0 auto;
     display: grid;
-    gap: clamp(1rem, 4vw, 1.6rem);
+    gap: clamp(0.45rem, 2vw, 0.9rem);
 }
 
 .venue-visual {
-    margin: 0;
+    position: relative;
+    width: min(112vw, 560px);
+    margin-top: clamp(-0.7rem, -2.2vw, -0.25rem);
+    margin-inline: calc(50% - min(56vw, 280px));
+    position: relative;
+    overflow: visible;
+    isolation: isolate;
 }
 
 .venue-visual img {
-    width: min(100%, 500px);
+    width: 100%;
+    max-width: 100%;
     height: auto;
     object-fit: contain;
     object-position: center;
-    margin: 0 auto;
     display: block;
+    filter: saturate(0.98) contrast(0.98);
+    -webkit-mask-image: linear-gradient(
+        to bottom,
+        #000 0%,
+        #000 72%,
+        rgba(0, 0, 0, 0.82) 82%,
+        rgba(0, 0, 0, 0.35) 92%,
+        transparent 100%
+    );
+    mask-image: linear-gradient(
+        to bottom,
+        #000 0%,
+        #000 72%,
+        rgba(0, 0, 0, 0.82) 82%,
+        rgba(0, 0, 0, 0.35) 92%,
+        transparent 100%
+    );
+}
+
+.venue-visual::after {
+    content: none;
+    display: none;
 }
 
 .venue-copy {
     width: min(100%, 460px);
     margin: 0 auto;
     display: grid;
-    gap: clamp(0.34rem, 1.4vw, 0.5rem);
+    gap: clamp(0.2rem, 1vw, 0.38rem);
     place-items: center;
+    order: -1;
 }
 
-.venue-kicker {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.4rem;
-    font-family: "Ovo", Georgia, serif;
-    font-size: clamp(0.72rem, 2.8vw, 0.9rem);
-    color: #7f6640;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
+.venue-pin {
+    margin: 0;
+    line-height: 1;
 }
 
-.venue-kicker__icon {
-    width: clamp(0.74rem, 2.7vw, 0.92rem);
+.venue-pin__icon {
+    width: clamp(1.55rem, 5.9vw, 2.25rem);
     height: auto;
-    opacity: 0.88;
+    opacity: 0.9;
 }
 
 .venue-copy h3 {
@@ -798,6 +821,124 @@ body.is-open .hero-divider    { animation-delay: 0.75s; }
 @media (min-width: 1025px) {
     .venue-content,
     .venue-copy {
+        width: min(100%, 560px);
+    }
+
+    .venue-visual {
+        width: min(100%, 620px);
+        margin-inline: auto;
+    }
+}
+
+/* ============================================================
+   Dress code section
+   ============================================================ */
+.dress-code-section {
+    max-width: none;
+    margin: 0;
+    padding: clamp(3.3rem, 8.8vw, 4.9rem) 1rem clamp(4.2rem, 9.6vw, 5.8rem);
+    text-align: center;
+    background: transparent;
+    overflow-x: hidden;
+}
+
+.dress-code-section .section-heading {
+    margin-bottom: clamp(0.7rem, 2.8vw, 1.15rem);
+}
+
+.dress-code-content {
+    width: min(100%, 520px);
+    margin: 0 auto;
+    display: grid;
+    gap: clamp(0.95rem, 3.8vw, 1.5rem);
+    place-items: center;
+}
+
+.dress-code-visual {
+    width: min(100%, 460px);
+    margin: 0 auto;
+}
+
+.dress-code-visual img {
+    width: min(100%, 460px);
+    height: auto;
+    object-fit: contain;
+    object-position: center;
+    margin: 0 auto;
+}
+
+.dress-code-copy {
+    width: min(100%, 430px);
+    margin: 0 auto;
+    display: grid;
+    gap: clamp(0.5rem, 2.2vw, 0.88rem);
+    justify-items: center;
+}
+
+.dress-code-note {
+    font-family: "Ovo", Georgia, serif;
+    font-size: clamp(0.82rem, 3.05vw, 0.98rem);
+    line-height: 1.62;
+    color: #5f5037;
+    max-width: 34ch;
+}
+
+.dress-code-copy h3 {
+    font-family: var(--font-display);
+    font-size: clamp(1.02rem, 4vw, 1.28rem);
+    font-weight: 400;
+    color: #866739;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+}
+
+.palette-row {
+    width: min(100%, 420px);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(0.42rem, 2vw, 0.86rem);
+}
+
+.palette-item {
+    display: grid;
+    justify-items: center;
+    gap: clamp(0.34rem, 1.5vw, 0.5rem);
+}
+
+.palette-swatch {
+    width: clamp(2.15rem, 9vw, 2.75rem);
+    aspect-ratio: 1 / 1;
+    border-radius: 999px;
+    background: var(--swatch, #000000);
+    box-shadow:
+        inset 0 0 0 1px rgba(42, 42, 42, 0.08),
+        0 5px 14px rgba(42, 42, 42, 0.12);
+}
+
+.palette-swatch--ivory {
+    border: 1px solid rgba(134, 103, 57, 0.58);
+}
+
+.palette-item span:last-child {
+    font-family: var(--font-display);
+    font-size: clamp(0.82rem, 3vw, 0.95rem);
+    color: #6e5a3a;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+@media (max-width: 359px) {
+    .palette-row {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        justify-items: center;
+    }
+}
+
+@media (min-width: 1025px) {
+    .dress-code-content,
+    .dress-code-copy,
+    .palette-row {
         width: min(100%, 520px);
     }
 }
