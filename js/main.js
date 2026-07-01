@@ -236,56 +236,79 @@
         });
     }
 
-    function setupSparkleLayer() {
-        const sparkleLayer = document.querySelector(".sparkle-layer");
-        if (!sparkleLayer) {
+    function setupStarfield() {
+        const starfield = document.getElementById("starfield");
+        if (!starfield || starfield.dataset.ready === "true") {
             return;
         }
 
-        const sparkleCount = 140;
+        const starCount = 120;
         const fragment = document.createDocumentFragment();
 
-        for (let i = 0; i < sparkleCount; i += 1) {
-            const sparkle = document.createElement("span");
-            sparkle.className = "sparkle";
+        function edgeBiasedPosition() {
+            const favorEdge = Math.random() < 0.72;
+            if (!favorEdge) {
+                return (Math.random() * 100).toFixed(2) + "%";
+            }
 
-            const left = (Math.random() * 100).toFixed(2);
-            const top = (Math.random() * 100).toFixed(2);
-            const size = (1.3 + Math.random() * 2.8).toFixed(2);
-            const duration = (2.2 + Math.random() * 3.6).toFixed(2);
-            const delay = (Math.random() * 6).toFixed(2);
-            const alpha = (0.58 + Math.random() * 0.34).toFixed(2);
-
-            sparkle.style.left = left + "%";
-            sparkle.style.top = top + "%";
-            sparkle.style.setProperty("--sparkle-size", size + "px");
-            sparkle.style.setProperty("--sparkle-duration", duration + "s");
-            sparkle.style.setProperty("--sparkle-delay", delay + "s");
-            sparkle.style.setProperty("--sparkle-alpha", alpha);
-
-            fragment.appendChild(sparkle);
+            const leftEdge = Math.random() < 0.5;
+            const value = leftEdge
+                ? Math.random() * 24
+                : 76 + Math.random() * 24;
+            return value.toFixed(2) + "%";
         }
 
-        sparkleLayer.appendChild(fragment);
+        for (let i = 0; i < starCount; i += 1) {
+            const star = document.createElement("span");
+            star.className = "star";
+
+            const size = Math.random() * 2.4 + 1.35;
+            const opacity = Math.random() * 0.42 + 0.48;
+            const duration = Math.random() * 3.2 + 3;
+            const delay = Math.random() * -7;
+
+            star.style.setProperty("--x", edgeBiasedPosition());
+            star.style.setProperty("--y", (Math.random() * 100).toFixed(2) + "%");
+            star.style.setProperty("--s", size.toFixed(2) + "px");
+            star.style.setProperty("--o", opacity.toFixed(2));
+            star.style.setProperty("--d", duration.toFixed(2) + "s");
+            star.style.setProperty("--delay", delay.toFixed(2) + "s");
+
+            fragment.appendChild(star);
+        }
+
+        starfield.appendChild(fragment);
+        starfield.dataset.ready = "true";
     }
 
     setupScrollReveal();
     setupCountdown();
     setupRsvpStatic();
-    setupSparkleLayer();
+    setupStarfield();
 
     // Audio toggle wiring (button stays hidden until the site opens).
     if (audioToggle && music) {
+        function stopMusic() {
+            music.pause();
+            setAudioIcon(false);
+        }
+
+        function playMusic() {
+            const p = music.play();
+            if (p && typeof p.catch === "function") {
+                p.catch(function () { setAudioIcon(false); });
+            }
+            setAudioIcon(true);
+        }
+
         audioToggle.addEventListener("click", function () {
-            if (music.paused) {
-                const p = music.play();
-                if (p && typeof p.catch === "function") {
-                    p.catch(function () { setAudioIcon(false); });
-                }
-                setAudioIcon(true);
+            const pressedState = audioToggle.getAttribute("aria-pressed") === "true";
+
+            // If UI says "playing" or media is actually playing, force a pause.
+            if (pressedState || !music.paused) {
+                stopMusic();
             } else {
-                music.pause();
-                setAudioIcon(false);
+                playMusic();
             }
         });
         music.addEventListener("play",  function () { setAudioIcon(true); });

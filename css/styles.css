@@ -49,6 +49,7 @@
 html {
     -webkit-text-size-adjust: 100%;
     scroll-behavior: smooth;
+    overflow-x: hidden;
 }
 
 img,
@@ -268,67 +269,86 @@ body.is-open .envelope-gate {
 .site-main {
     position: relative;
     z-index: var(--z-site);
+    isolation: isolate;
     opacity: 0;
     transition: opacity var(--dur-site-reveal) var(--ease-elegant);
 }
 
-.sparkle-layer {
+.starfield {
     position: fixed;
     inset: 0;
-    z-index: 30;
+    z-index: 20;
     pointer-events: none;
     overflow: hidden;
     opacity: 0;
-    transition: opacity 1.6s cubic-bezier(0.19, 1, 0.22, 1);
+    transition: opacity 1.4s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
-body.is-open .sparkle-layer {
-    opacity: 0.96;
+body.is-open .starfield {
+    opacity: 1;
 }
 
-.sparkle {
+.star {
     position: absolute;
-    left: 0;
-    top: 0;
-    width: var(--sparkle-size, 2.8px);
-    height: var(--sparkle-size, 2.8px);
+    left: var(--x);
+    top: var(--y);
+    width: var(--s);
+    height: var(--s);
     border-radius: 50%;
-    background: radial-gradient(
-        circle,
-        rgba(255, 249, 225, 0.98) 0%,
-        rgba(255, 233, 171, 0.95) 32%,
-        rgba(193, 146, 65, 0.56) 58%,
-        transparent 82%
-    );
-    opacity: var(--sparkle-alpha, 0.68);
+    pointer-events: none;
+    opacity: 0;
+    background: #ffffff;
     box-shadow:
-        0 0 5px rgba(255, 241, 194, 0.68),
-        0 0 14px rgba(211, 165, 78, 0.44),
-        0 0 24px rgba(255, 255, 255, 0.22);
-    mix-blend-mode: screen;
-    animation: sparkleTwinkle var(--sparkle-duration, 5.5s)
-        ease-in-out var(--sparkle-delay, 0s) infinite;
+        0 0 6px rgba(255, 255, 255, 1),
+        0 0 12px rgba(255, 247, 224, 0.79),
+        0 0 20px rgba(216, 176, 102, 0.36);
+    animation: starTwinkle var(--d) ease-in-out var(--delay) infinite;
 }
 
-@keyframes sparkleTwinkle {
+.star::before,
+.star::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 255, 255, 0.76);
+    border-radius: 999px;
+}
+
+.star::before {
+    width: calc(var(--s) * 4.2);
+    height: 1px;
+}
+
+.star::after {
+    width: 1px;
+    height: calc(var(--s) * 4.2);
+}
+
+@keyframes starTwinkle {
     0%,
     100% {
-        opacity: 0.16;
-        transform: scale(0.65);
+        opacity: 0.12;
+        transform: scale(0.55);
     }
-    45% {
-        opacity: var(--sparkle-alpha, 0.95);
-        transform: scale(1);
+    38% {
+        opacity: var(--o);
+        transform: scale(1.06);
     }
-    60% {
-        opacity: calc(var(--sparkle-alpha, 0.95) * 0.52);
-        transform: scale(0.82);
+    58% {
+        opacity: 0.31;
+        transform: scale(0.78);
     }
 }
 
-.site-main > section {
+main#site-main > section > * {
     position: relative;
-    z-index: 2;
+}
+
+main#site-main > section {
+    position: relative;
+    z-index: 30;
 }
 
 body.is-opening .site-main,
@@ -339,7 +359,7 @@ body.is-open .site-main {
 .section {
     max-width: var(--content-max);
     margin-inline: auto;
-    padding: 5rem 1.75rem;
+    padding: 4.2rem 1.5rem;
 }
 
 /* ============================================================
@@ -471,7 +491,7 @@ body.is-open .hero-divider    { animation-delay: 0.75s; }
 .invitation-section {
     max-width: none;
     margin: 0;
-    padding: clamp(4rem, 10vw, 5.5rem) 1rem clamp(5rem, 10vw, 6.5rem);
+    padding: clamp(3.2rem, 8.2vw, 4.5rem) 1rem clamp(4rem, 8.8vw, 5.4rem);
     background: transparent;
     display: flex;
     flex-direction: column;
@@ -502,138 +522,179 @@ body.is-open .hero-divider    { animation-delay: 0.75s; }
 
 .invitation-card {
     position: relative;
-    width: min(100%, 430px);
+    width: min(92vw, 430px);
+    height: clamp(760px, 198vw, 920px);
     max-width: 430px;
     margin: 0 auto;
+    overflow: visible;
 }
 
 .invitation-card__frame {
+    position: absolute;
+    inset: 0;
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: fill;
+    pointer-events: none;
+    user-select: none;
+    z-index: 1;
 }
 
 .invitation-card__content {
     position: absolute;
-    inset: 0;
+    left: 13%;
+    right: 13%;
+    top: 25.2%;
+    bottom: 12.8%;
+    z-index: 2;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: flex-start;
     text-align: center;
-    padding:
-        clamp(15.9rem, 50vw, 20rem)
-        clamp(2rem, 8.8vw, 2.85rem)
-        clamp(2.15rem, 7vw, 2.95rem);
+    overflow: hidden;
     color: #2f2f2f;
-    gap: clamp(0.18rem, 0.8vw, 0.34rem);
+    gap: clamp(0.22rem, 0.86vw, 0.44rem);
+}
+
+.invitation-card__content > * {
+    margin-block: 0;
 }
 
 .invitation-card__bismillah {
-    width: clamp(104px, 32vw, 136px);
+    width: min(46%, 150px);
     height: auto;
-    margin-top: clamp(4.8rem, 15vw, 7rem);
-    margin-bottom: clamp(1.05rem, 3.4vw, 1.5rem);
+    margin: 0 auto clamp(0.48rem, 1.5vw, 0.72rem);
+    display: block;
 }
 
 .invitation-card__divider {
-    width: clamp(44px, 14vw, 62px);
+    width: clamp(38px, 11.5vw, 52px);
     height: auto;
-    margin-bottom: clamp(1.2rem, 3.8vw, 1.75rem);
+    margin-bottom: clamp(0.34rem, 1.15vw, 0.58rem);
     filter: sepia(1) saturate(1.8) hue-rotate(-8deg) brightness(0.9);
 }
 
 .invitation-parents {
     font-family: var(--font-display);
-    font-size: clamp(0.83rem, 2.9vw, 0.98rem);
-    line-height: 1.48;
+    font-size: clamp(0.72rem, 2.1vw, 0.9rem);
+    line-height: 1.34;
     color: #6d5733;
-    margin-bottom: clamp(0.65rem, 2.6vw, 0.95rem);
-    max-width: 85%;
+    max-width: 96%;
 }
 
 .invitation-formal,
 .invitation-family,
 .invitation-closing {
     font-family: "Ovo", Georgia, serif;
-    font-size: clamp(0.64rem, 2.25vw, 0.76rem);
-    line-height: 1.45;
+    font-size: clamp(0.52rem, 1.55vw, 0.68rem);
+    line-height: 1.35;
     color: #454545;
-    max-width: 82%;
+    max-width: 98%;
     hyphens: auto;
 }
 
 .invitation-formal {
-    margin-bottom: clamp(0.62rem, 2.5vw, 0.88rem);
+    margin-bottom: clamp(0.08rem, 0.4vw, 0.2rem);
 }
 
 .invitation-bride,
 .invitation-groom {
     font-family: var(--font-display);
-    font-size: clamp(1.05rem, 4.2vw, 1.48rem);
-    line-height: 1.18;
+    font-size: clamp(0.95rem, 3.2vw, 1.25rem);
+    line-height: 1.12;
     color: #866739;
-    letter-spacing: 0.02em;
-    max-width: 84%;
-}
-
-.invitation-bride {
-    margin-bottom: 0.15rem;
+    letter-spacing: 0.015em;
+    max-width: 96%;
 }
 
 .invitation-with {
     font-family: "Ovo", Georgia, serif;
-    font-size: clamp(0.84rem, 3.1vw, 0.98rem);
+    font-size: clamp(0.62rem, 1.9vw, 0.78rem);
     color: #866739;
-    margin: 0.05rem 0 0.22rem;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.06em;
+    line-height: 1.2;
 }
 
 .invitation-groom {
-    margin-bottom: clamp(0.56rem, 2.2vw, 0.8rem);
+    margin-bottom: clamp(0.02rem, 0.22vw, 0.12rem);
 }
 
 .invitation-family {
-    margin-bottom: clamp(0.62rem, 2.4vw, 0.88rem);
+    margin-bottom: clamp(0.08rem, 0.36vw, 0.2rem);
+}
+
+.invitation-family-intro {
+    font-family: "Ovo", Georgia, serif;
+    font-size: clamp(0.52rem, 1.55vw, 0.68rem);
+    line-height: 1.35;
+    color: #454545;
+}
+
+.invitation-family-line2 {
+    display: inline;
+}
+
+.invitation-family--parents-font {
+    font-family: var(--font-display);
+    font-size: clamp(0.72rem, 2.1vw, 0.9rem);
+    line-height: 1.34;
+    color: #6d5733;
+    max-width: 96%;
+}
+
+@media (max-width: 767px) {
+    .invitation-formal,
+    .invitation-family-intro,
+    .invitation-closing {
+        font-size: clamp(0.6rem, 2.15vw, 0.78rem);
+        line-height: 1.46;
+    }
+
+    .event-location-main {
+        font-size: clamp(1.46rem, 5.05vw, 2.06rem);
+    }
 }
 
 .invitation-closing {
-    margin-bottom: clamp(0.45rem, 1.7vw, 0.62rem);
+    margin-bottom: clamp(0.08rem, 0.32vw, 0.18rem);
 }
 
 .invitation-event-details {
-    margin-top: clamp(0.65rem, 2.65vw, 1.05rem);
+    margin-top: clamp(0.2rem, 0.8vw, 0.4rem);
     display: grid;
     justify-items: center;
-    gap: 0.16rem;
+    gap: clamp(0.14rem, 0.48vw, 0.28rem);
     position: relative;
 }
 
-.invitation-event-details::before {
-    content: "";
-    width: clamp(74px, 23vw, 108px);
-    height: 1px;
-    margin-bottom: 0.16rem;
-    background: linear-gradient(90deg, rgba(134, 103, 57, 0), rgba(134, 103, 57, 0.42), rgba(134, 103, 57, 0));
+.event-details-divider {
+    width: clamp(72px, 22vw, 106px);
+    height: auto;
+    margin: clamp(0.06rem, 0.28vw, 0.16rem) 0 clamp(0.16rem, 0.62vw, 0.32rem);
+    opacity: 0.84;
+    filter: sepia(1) saturate(1.2) brightness(0.86);
 }
 
 .event-date,
 .event-time {
     font-family: "Ovo", Georgia, serif;
-    font-size: clamp(0.72rem, 2.45vw, 0.9rem);
+    font-size: clamp(0.62rem, 1.8vw, 0.78rem);
     color: #6d5531;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    line-height: 1.28;
+    line-height: 1.18;
 }
 
 .event-time {
-    margin-bottom: 0.18rem;
+    margin-bottom: clamp(0.12rem, 0.46vw, 0.24rem);
 }
 
 .event-location-main {
     font-family: "weddingday", "Beau Rivage", cursive;
-    font-size: clamp(1.45rem, 5.2vw, 2.18rem);
+    font-size: clamp(1.34rem, 4.45vw, 1.9rem);
     color: #866739;
-    line-height: 1;
+    line-height: 0.95;
     position: relative;
     display: inline-block;
     text-shadow: 0 0 0.5px rgba(134, 103, 57, 0.45);
@@ -664,11 +725,12 @@ body.is-open .hero-divider    { animation-delay: 0.75s; }
 
 .event-location-sub {
     font-family: Georgia, "Times New Roman", serif;
-    font-size: clamp(0.78rem, 2.4vw, 0.95rem);
+    font-size: clamp(0.58rem, 1.8vw, 0.74rem);
     color: #454545;
-    line-height: 1.25;
+    line-height: 1.2;
     font-style: normal;
     letter-spacing: 0.02em;
+    margin-top: clamp(0.06rem, 0.24vw, 0.14rem);
 }
 
 @keyframes senakunjaGlow {
@@ -713,7 +775,8 @@ body.is-open .hero-divider    { animation-delay: 0.75s; }
 
 @media (min-width: 768px) {
     .invitation-card {
-        width: min(430px, 100%);
+        width: 430px;
+        height: 920px;
         max-width: 430px;
     }
 }
@@ -724,7 +787,7 @@ body.is-open .hero-divider    { animation-delay: 0.75s; }
 .countdown-section {
     max-width: none;
     margin: 0;
-    padding: clamp(3.2rem, 9vw, 4.6rem) 1rem clamp(4.2rem, 10vw, 5.5rem);
+    padding: clamp(2.5rem, 6.8vw, 3.6rem) 1rem clamp(3.2rem, 7.8vw, 4.4rem);
     text-align: center;
     background: transparent;
 }
@@ -799,7 +862,7 @@ body.is-open .hero-divider    { animation-delay: 0.75s; }
 
 @media (min-width: 1025px) {
     .countdown-section {
-        padding-top: 4.2rem;
+        padding-top: 3.2rem;
     }
 
     .countdown-grid,
@@ -815,7 +878,7 @@ body.is-open .hero-divider    { animation-delay: 0.75s; }
 .venue-section {
     max-width: none;
     margin: 0;
-    padding: clamp(3.5rem, 9vw, 5rem) 1rem clamp(4.6rem, 10vw, 6.2rem);
+    padding: clamp(2.8rem, 7vw, 3.9rem) 1rem clamp(3.6rem, 8vw, 4.8rem);
     text-align: center;
     background: transparent;
     overflow-x: hidden;
@@ -954,7 +1017,7 @@ body.is-open .hero-divider    { animation-delay: 0.75s; }
 .dress-code-section {
     max-width: none;
     margin: 0;
-    padding: clamp(3.3rem, 8.8vw, 4.9rem) 1rem clamp(4.2rem, 9.6vw, 5.8rem);
+    padding: clamp(2.7rem, 6.8vw, 3.8rem) 1rem clamp(3.4rem, 7.8vw, 4.6rem);
     text-align: center;
     background: transparent;
     overflow-x: hidden;
@@ -1096,7 +1159,7 @@ body.is-open .hero-divider    { animation-delay: 0.75s; }
 .rsvp-section {
     max-width: none;
     margin: 0;
-    padding: clamp(3.4rem, 9vw, 5rem) 1rem clamp(4.2rem, 10vw, 5.9rem);
+    padding: clamp(2.8rem, 7vw, 3.9rem) 1rem clamp(3.4rem, 8vw, 4.7rem);
     text-align: center;
     background: transparent;
     overflow-x: hidden;
@@ -1237,7 +1300,7 @@ body.is-open .hero-divider    { animation-delay: 0.75s; }
 .location-section {
     max-width: none;
     margin: 0;
-    padding: clamp(3.5rem, 9vw, 5rem) 1rem clamp(4.5rem, 10vw, 6rem);
+    padding: clamp(2.9rem, 7.2vw, 4rem) 1rem clamp(3.6rem, 8.2vw, 4.9rem);
     text-align: center;
     background: transparent;
     overflow-x: hidden;
@@ -1346,7 +1409,7 @@ body.is-open .hero-divider    { animation-delay: 0.75s; }
 .closing-section {
     max-width: none;
     margin: 0;
-    padding: clamp(3.7rem, 10vw, 5.4rem) 1rem clamp(6rem, 15vw, 8.4rem);
+    padding: clamp(3rem, 7.6vw, 4.2rem) 1rem clamp(4.8rem, 11vw, 6.2rem);
     text-align: center;
     background: transparent;
     overflow-x: hidden;
@@ -1521,13 +1584,9 @@ body.is-open .audio-toggle {
         animation: none !important;
     }
 
-    .sparkle-layer {
-        opacity: 0.2 !important;
-    }
-
-    .sparkle {
+    .star {
+        opacity: 0.14 !important;
         animation: none !important;
-        opacity: 0.16 !important;
     }
 
     .event-location-main,
