@@ -83,6 +83,11 @@ body {
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
+    transition: background-color 520ms ease, color 520ms ease;
+}
+
+body.mood-night {
+    background-color: #efdbc8;
 }
 
 body:not(.is-open) {
@@ -114,6 +119,42 @@ body:not(.is-open) {
         url("../assets/intro/bg-ivory-paper.webp") center / cover no-repeat,
         linear-gradient(135deg, #f9f5ee 0%, #ede8de 100%);
     opacity: 1;
+}
+
+.envelope-gate::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 12;
+    background:
+        radial-gradient(circle at 50% 52%, rgba(255, 243, 207, 0.68) 0%, rgba(255, 236, 186, 0.28) 24%, rgba(255, 233, 177, 0.06) 48%, rgba(255, 230, 170, 0) 68%),
+        radial-gradient(circle at 46% 50%, rgba(255, 227, 153, 0.62) 0 1.7%, transparent 3.4%),
+        radial-gradient(circle at 53% 52%, rgba(255, 224, 145, 0.52) 0 1.4%, transparent 3%),
+        radial-gradient(circle at 49% 54%, rgba(255, 239, 194, 0.48) 0 1.2%, transparent 2.8%);
+}
+
+@keyframes ceremonialBloom {
+    0% {
+        opacity: 0;
+        transform: scale(0.92);
+        filter: blur(0px);
+    }
+    24% {
+        opacity: 0.95;
+        transform: scale(1.04);
+        filter: blur(0.4px);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(1.12);
+        filter: blur(1.1px);
+    }
+}
+
+body.is-opening .envelope-gate::after {
+    animation: ceremonialBloom 0.62s cubic-bezier(0.19, 1, 0.22, 1) 0.06s both;
 }
 
 .figma-envelope-wrap {
@@ -274,6 +315,10 @@ body.is-open .envelope-gate {
     transition: opacity var(--dur-site-reveal) var(--ease-elegant);
 }
 
+body.mood-night .site-main {
+    filter: saturate(1.08) contrast(1.03) brightness(0.95);
+}
+
 .starfield {
     position: fixed;
     inset: 0;
@@ -286,6 +331,11 @@ body.is-open .envelope-gate {
 
 body.is-open .starfield {
     opacity: 1;
+}
+
+body.mood-night .starfield {
+    opacity: 1;
+    filter: saturate(1.24) brightness(1.17);
 }
 
 .star {
@@ -303,6 +353,13 @@ body.is-open .starfield {
         0 0 12px rgba(255, 247, 224, 0.79),
         0 0 20px rgba(216, 176, 102, 0.36);
     animation: starTwinkle var(--d) ease-in-out var(--delay) infinite;
+}
+
+body.mood-night .star {
+    box-shadow:
+        0 0 8px rgba(255, 255, 255, 1),
+        0 0 16px rgba(255, 245, 216, 0.88),
+        0 0 28px rgba(227, 191, 124, 0.5);
 }
 
 .star::before,
@@ -411,6 +468,15 @@ body.is-open .site-main {
             rgba(249, 230, 212, 0.10) 80%,
             rgba(249, 230, 212, 0.0) 92%);
     pointer-events: none;
+}
+
+body.mood-night .hero-overlay {
+    background:
+        linear-gradient(to bottom,
+            rgba(249, 230, 212, 0.04) 38%,
+            rgba(245, 214, 182, 0.32) 66%,
+            rgba(236, 198, 158, 0.15) 81%,
+            rgba(249, 230, 212, 0.02) 94%);
 }
 
 .hero-content {
@@ -1549,6 +1615,55 @@ body.is-open .audio-toggle {
 }
 
 /* ============================================================
+   Mood toggle (shown after open)
+   ============================================================ */
+.mood-toggle {
+    position: fixed;
+    right: max(1rem, env(safe-area-inset-right));
+    bottom: calc(max(1rem, env(safe-area-inset-bottom)) + 3.3rem);
+    z-index: var(--z-audio);
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 50%;
+    background: rgba(249, 230, 212, 0.85);
+    color: var(--color-gold);
+    border: 1px solid var(--color-border);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    display: grid;
+    place-items: center;
+    box-shadow: 0 4px 14px rgba(42, 42, 42, 0.18);
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity var(--dur-med) var(--ease-elegant),
+                transform var(--dur-med) var(--ease-elegant),
+                background-color 260ms ease;
+}
+
+body.is-open .mood-toggle {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.mood-toggle:hover,
+.mood-toggle:focus-visible {
+    outline: none;
+    background: rgba(249, 230, 212, 1);
+}
+
+body.mood-night .mood-toggle,
+body.mood-night .audio-toggle {
+    background: rgba(77, 56, 35, 0.5);
+    border-color: rgba(196, 162, 112, 0.76);
+    color: #efd8b1;
+}
+
+.mood-toggle__icon {
+    font-size: 1rem;
+    line-height: 1;
+}
+
+/* ============================================================
    Reduced motion
    ============================================================ */
 @media (prefers-reduced-motion: reduce) {
@@ -1592,5 +1707,17 @@ body.is-open .audio-toggle {
     .event-location-main,
     .event-location-main::after {
         animation: none !important;
+    }
+
+    .envelope-gate::after {
+        animation: none !important;
+        opacity: 0 !important;
+    }
+
+    .mood-toggle,
+    .audio-toggle,
+    .site-main,
+    .starfield {
+        transition: none !important;
     }
 }

@@ -12,8 +12,12 @@
     const siteMain = document.getElementById("site-main");
     const music = document.getElementById("bg-music");
     const audioToggle = document.getElementById("audio-toggle");
+    const moodToggle = document.getElementById("mood-toggle");
     const audioIcon = audioToggle
         ? audioToggle.querySelector(".audio-toggle__icon")
+        : null;
+    const moodIcon = moodToggle
+        ? moodToggle.querySelector(".mood-toggle__icon")
         : null;
 
     if (!gate || !seal || !siteMain) {
@@ -29,6 +33,26 @@
     const GATE_HIDE_MS = prefersReducedMotion ? 80 : 3800;
 
     let opened = false;
+
+    function setMoodState(isNight) {
+        body.classList.toggle("mood-night", isNight);
+
+        if (!moodToggle || !moodIcon) {
+            return;
+        }
+
+        if (isNight) {
+            moodIcon.textContent = "☾";
+            moodIcon.dataset.state = "night";
+            moodToggle.setAttribute("aria-pressed", "true");
+            moodToggle.setAttribute("aria-label", "Switch to day glow");
+        } else {
+            moodIcon.textContent = "☀";
+            moodIcon.dataset.state = "day";
+            moodToggle.setAttribute("aria-pressed", "false");
+            moodToggle.setAttribute("aria-label", "Switch to night glow");
+        }
+    }
 
     function startMusic() {
         if (!music) {
@@ -73,6 +97,11 @@
 
         // 1. Kick off the flap animation immediately.
         body.classList.add("is-opening");
+        body.classList.add("is-ceremonial-open");
+
+        window.setTimeout(function () {
+            body.classList.remove("is-ceremonial-open");
+        }, prefersReducedMotion ? 80 : 900);
 
         // 2. Start music (user gesture makes autoplay legal here).
         startMusic();
@@ -88,6 +117,9 @@
             body.classList.add("is-open");
             if (audioToggle) {
                 audioToggle.hidden = false;
+            }
+            if (moodToggle) {
+                moodToggle.hidden = false;
             }
         }, OPEN_TOTAL_MS);
 
@@ -111,7 +143,12 @@
         if (audioToggle) {
             audioToggle.hidden = false;
         }
+        if (moodToggle) {
+            moodToggle.hidden = false;
+        }
     }
+
+    setMoodState(false);
 
     function setupScrollReveal() {
         const items = document.querySelectorAll(".reveal-on-scroll");
@@ -313,5 +350,12 @@
         });
         music.addEventListener("play",  function () { setAudioIcon(true); });
         music.addEventListener("pause", function () { setAudioIcon(false); });
+    }
+
+    if (moodToggle) {
+        moodToggle.addEventListener("click", function () {
+            const isNight = !body.classList.contains("mood-night");
+            setMoodState(isNight);
+        });
     }
 })();
