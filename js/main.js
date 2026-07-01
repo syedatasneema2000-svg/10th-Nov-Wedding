@@ -242,7 +242,7 @@
             return;
         }
 
-        const sparkleCount = 46;
+        const sparkleCount = 58;
         const fragment = document.createDocumentFragment();
 
         for (let i = 0; i < sparkleCount; i += 1) {
@@ -251,10 +251,10 @@
 
             const left = (Math.random() * 100).toFixed(2);
             const top = (Math.random() * 100).toFixed(2);
-            const size = (1 + Math.random() * 2).toFixed(2);
-            const duration = (3 + Math.random() * 4).toFixed(2);
+            const size = (1.25 + Math.random() * 2.15).toFixed(2);
+            const duration = (2.8 + Math.random() * 3.6).toFixed(2);
             const delay = (Math.random() * 6).toFixed(2);
-            const alpha = (0.24 + Math.random() * 0.34).toFixed(2);
+            const alpha = (0.42 + Math.random() * 0.36).toFixed(2);
 
             sparkle.style.left = left + "%";
             sparkle.style.top = top + "%";
