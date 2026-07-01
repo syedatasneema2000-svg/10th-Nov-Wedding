@@ -144,7 +144,70 @@
         });
     }
 
+    function setupCountdown() {
+        const daysEl = document.querySelector("[data-countdown-days]");
+        const hoursEl = document.querySelector("[data-countdown-hours]");
+        const minutesEl = document.querySelector("[data-countdown-minutes]");
+        const secondsEl = document.querySelector("[data-countdown-seconds]");
+        const completeEl = document.querySelector("[data-countdown-complete]");
+
+        if (!daysEl || !hoursEl || !minutesEl || !secondsEl) {
+            return;
+        }
+
+        const targetDate = new Date("2026-11-10T19:00:00+06:00");
+
+        function pad2(num) {
+            return String(num).padStart(2, "0");
+        }
+
+        function setCompleteState() {
+            daysEl.textContent = "00";
+            hoursEl.textContent = "00";
+            minutesEl.textContent = "00";
+            secondsEl.textContent = "00";
+            if (completeEl) {
+                completeEl.hidden = false;
+            }
+        }
+
+        function updateCountdown() {
+            const now = new Date();
+            const diff = targetDate.getTime() - now.getTime();
+
+            if (diff <= 0) {
+                setCompleteState();
+                return true;
+            }
+
+            const totalSeconds = Math.floor(diff / 1000);
+            const days = Math.floor(totalSeconds / 86400);
+            const hours = Math.floor((totalSeconds % 86400) / 3600);
+            const minutes = Math.floor((totalSeconds % 3600) / 60);
+            const seconds = totalSeconds % 60;
+
+            daysEl.textContent = String(days);
+            hoursEl.textContent = pad2(hours);
+            minutesEl.textContent = pad2(minutes);
+            secondsEl.textContent = pad2(seconds);
+            return false;
+        }
+
+        const done = updateCountdown();
+        if (done) {
+            return;
+        }
+
+        const timerId = window.setInterval(function () {
+            const finished = updateCountdown();
+            if (finished) {
+                window.clearInterval(timerId);
+            }
+        }, 1000);
+    }
+
     setupScrollReveal();
+    setupCountdown();
 
     // Audio toggle wiring (button stays hidden until the site opens).
     if (audioToggle && music) {

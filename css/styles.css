@@ -11,6 +11,14 @@
     font-display: swap;
 }
 
+@font-face {
+    font-family: "weddingday";
+    src: url("../assets/fonts/weddingday.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
 :root {
     --color-paper: #f9e6d4;
     --color-gold: #866739;
@@ -18,6 +26,7 @@
     --color-border: #ac9778;
     --font-body: "newtemplate", Georgia, "Times New Roman", serif;
     --font-display: "newtemplate", Georgia, serif;
+    --font-cursive: "weddingday", "newtemplate", Georgia, serif;
     --font-hero: "Cormorant Garamond", "EB Garamond", Georgia, serif;
     --font-hero-alt: "EB Garamond", "Cormorant Garamond", Georgia, serif;
     --color-brown: #3f2a17;
@@ -351,33 +360,27 @@ body.is-open .site-main {
 
 /* Children are invisible by default; body.is-open triggers the animation */
 .hero-names,
-.hero-divider,
-.hero-details,
-.hero-venue {
+.hero-divider {
     opacity: 0;
 }
 
 body.is-open .hero-names,
-body.is-open .hero-divider,
-body.is-open .hero-details,
-body.is-open .hero-venue {
+body.is-open .hero-divider {
     animation: heroFadeUp 2s cubic-bezier(0.19, 1, 0.22, 1) both;
 }
 
 body.is-open .hero-names      { animation-delay: 0.3s; }
 body.is-open .hero-divider    { animation-delay: 0.75s; }
-body.is-open .hero-details    { animation-delay: 1.0s; }
-body.is-open .hero-venue      { animation-delay: 1.25s; }
 
 /* Typography */
 .hero-names {
-    font-family: var(--font-hero);
-    font-size: clamp(2.8rem, 13vw, 4.2rem);
-    font-weight: 500;
+    font-family: var(--font-cursive);
+    font-size: clamp(3.2rem, 14vw, 5rem);
+    font-weight: 400;
     color: var(--color-brown);
-    letter-spacing: 0.02em;
-    line-height: 1.02;
-    margin: 0;
+    letter-spacing: 0.01em;
+    line-height: 0.96;
+    margin: clamp(1rem, 4vw, 1.8rem) 0 0;
 }
 
 .hero-divider {
@@ -387,37 +390,6 @@ body.is-open .hero-venue      { animation-delay: 1.25s; }
     display: block;
     margin: 0.6rem auto;
     filter: sepia(1) saturate(2) hue-rotate(-8deg) brightness(0.45);
-}
-
-.hero-details {
-    display: flex;
-    align-items: center;
-    gap: 0.65rem;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-.hero-detail {
-    font-family: var(--font-hero-alt);
-    font-size: clamp(0.85rem, 3.6vw, 1.05rem);
-    color: #23140a;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-}
-
-.hero-detail-sep {
-    color: #23140a;
-    font-size: 0.7rem;
-    opacity: 0.6;
-}
-
-.hero-venue {
-    font-family: var(--font-hero-alt);
-    font-size: clamp(0.78rem, 3.3vw, 0.95rem);
-    color: #23140a;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    opacity: 0;   /* overridden by is-open animation */
 }
 
 /* Desktop: keep the vertical mobile-style frame, centered */
@@ -451,29 +423,32 @@ body.is-open .hero-venue      { animation-delay: 1.25s; }
 }
 
 .section-heading h2 {
-    font-family: var(--font-display);
-    font-size: clamp(1.55rem, 7vw, 2.25rem);
+    font-family: var(--font-cursive);
+    font-size: clamp(2.05rem, 9.8vw, 3.15rem);
     font-weight: 400;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.02em;
     color: #876836;
+    line-height: 1.05;
 }
 
 .section-heading__divider {
-    width: min(68%, 210px);
+    width: min(78%, 278px);
     margin: 0.55rem auto 0;
     height: auto;
-    filter: sepia(1) saturate(2.1) hue-rotate(-8deg) brightness(0.84);
+    filter: sepia(1) saturate(2.1) hue-rotate(-8deg) brightness(0.82);
 }
 
 .invitation-card {
     position: relative;
-    width: min(100%, 430px);
+    width: min(100%, 448px);
     margin: 0 auto;
 }
 
 .invitation-card__frame {
     width: 100%;
     height: auto;
+    min-height: clamp(930px, 276vw, 1180px);
+    object-fit: fill;
 }
 
 .invitation-card__content {
@@ -484,40 +459,45 @@ body.is-open .hero-venue      { animation-delay: 1.25s; }
     align-items: center;
     text-align: center;
     padding:
-        clamp(2.45rem, 8.4vw, 3.4rem)
-        clamp(1.15rem, 5vw, 1.75rem)
-        clamp(2rem, 7vw, 3rem);
+        clamp(15.9rem, 50vw, 20rem)
+        clamp(2rem, 8.8vw, 2.85rem)
+        clamp(2.15rem, 7vw, 2.95rem);
     color: #2f2f2f;
+    gap: clamp(0.18rem, 0.8vw, 0.34rem);
 }
 
 .invitation-card__bismillah {
-    width: clamp(98px, 36vw, 140px);
+    width: clamp(104px, 32vw, 136px);
     height: auto;
-    margin-bottom: clamp(0.52rem, 2.2vw, 0.85rem);
+    margin-top: clamp(4.8rem, 15vw, 7rem);
+    margin-bottom: clamp(1.05rem, 3.4vw, 1.5rem);
 }
 
 .invitation-card__divider {
-    width: clamp(96px, 35vw, 140px);
+    width: clamp(44px, 14vw, 62px);
     height: auto;
-    margin-bottom: clamp(0.55rem, 2.1vw, 0.8rem);
-    filter: sepia(1) saturate(2.1) hue-rotate(-8deg) brightness(0.86);
+    margin-bottom: clamp(1.2rem, 3.8vw, 1.75rem);
+    filter: sepia(1) saturate(1.8) hue-rotate(-8deg) brightness(0.9);
 }
 
 .invitation-parents {
     font-family: var(--font-display);
-    font-size: clamp(0.88rem, 3.35vw, 1.02rem);
-    line-height: 1.42;
+    font-size: clamp(0.83rem, 2.9vw, 0.98rem);
+    line-height: 1.48;
     color: #6d5733;
-    margin-bottom: clamp(0.65rem, 2.7vw, 0.95rem);
+    margin-bottom: clamp(0.65rem, 2.6vw, 0.95rem);
+    max-width: 85%;
 }
 
 .invitation-formal,
 .invitation-family,
 .invitation-closing {
-    font-family: var(--font-body);
-    font-size: clamp(0.72rem, 2.75vw, 0.86rem);
-    line-height: 1.48;
+    font-family: "Ovo", Georgia, serif;
+    font-size: clamp(0.64rem, 2.25vw, 0.76rem);
+    line-height: 1.45;
     color: #454545;
+    max-width: 82%;
+    hyphens: auto;
 }
 
 .invitation-formal {
@@ -527,10 +507,11 @@ body.is-open .hero-venue      { animation-delay: 1.25s; }
 .invitation-bride,
 .invitation-groom {
     font-family: var(--font-display);
-    font-size: clamp(1.24rem, 5.2vw, 1.78rem);
+    font-size: clamp(1.05rem, 4.2vw, 1.48rem);
     line-height: 1.18;
     color: #866739;
     letter-spacing: 0.02em;
+    max-width: 84%;
 }
 
 .invitation-bride {
@@ -538,10 +519,10 @@ body.is-open .hero-venue      { animation-delay: 1.25s; }
 }
 
 .invitation-with {
-    font-family: var(--font-display);
-    font-size: clamp(0.88rem, 3.5vw, 1.08rem);
+    font-family: "Ovo", Georgia, serif;
+    font-size: clamp(0.84rem, 3.1vw, 0.98rem);
     color: #866739;
-    margin: 0.05rem 0 0.2rem;
+    margin: 0.05rem 0 0.22rem;
     letter-spacing: 0.08em;
 }
 
@@ -564,12 +545,31 @@ body.is-open .hero-venue      { animation-delay: 1.25s; }
 }
 
 .invitation-event__line {
-    font-family: var(--font-display);
-    font-size: clamp(0.8rem, 3.2vw, 0.98rem);
+    font-family: var(--font-cursive);
+    font-size: clamp(0.76rem, 2.95vw, 0.94rem);
     color: #866739;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.04em;
     text-transform: uppercase;
     line-height: 1.35;
+}
+
+.invitation-event__venue {
+    margin-top: 0.1rem;
+}
+
+.invitation-event__senakunja {
+    font-family: var(--font-cursive);
+    font-style: normal;
+    font-size: clamp(1.45rem, 5.7vw, 2.05rem);
+    color: #866739;
+    letter-spacing: 0.01em;
+    text-transform: none;
+    line-height: 1.05;
+}
+
+.invitation-event__cantonment {
+    display: inline-block;
+    margin-top: 0.12rem;
 }
 
 /* Reveal animation (scroll + graceful fallback) */
@@ -592,7 +592,213 @@ body.is-open .hero-venue      { animation-delay: 1.25s; }
     }
 
     .invitation-card {
-        width: min(430px, 42vw);
+        width: min(448px, 44vw);
+    }
+
+    .invitation-card__frame {
+        min-height: 820px;
+    }
+}
+
+/* ============================================================
+   Countdown section
+   ============================================================ */
+.countdown-section {
+    max-width: none;
+    margin: 0;
+    padding: clamp(3.2rem, 9vw, 4.6rem) 1rem clamp(4.2rem, 10vw, 5.5rem);
+    text-align: center;
+    background: transparent;
+}
+
+.countdown-section .section-heading {
+    margin-bottom: clamp(0.55rem, 2.4vw, 0.95rem);
+}
+
+.countdown-subtitle {
+    font-family: "Ovo", Georgia, serif;
+    font-size: clamp(0.85rem, 3.3vw, 1rem);
+    color: #7f6640;
+    letter-spacing: 0.08em;
+    margin: 0 auto clamp(1.15rem, 4.2vw, 1.8rem);
+    width: min(100%, 430px);
+}
+
+.countdown-grid {
+    width: min(100%, 430px);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(0.7rem, 2.6vw, 1rem) clamp(0.85rem, 3vw, 1.2rem);
+}
+
+.countdown-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(0.3rem, 1.5vw, 0.45rem) 0;
+}
+
+.countdown-number {
+    font-family: var(--font-display);
+    font-size: clamp(2.05rem, 10vw, 3rem);
+    line-height: 1;
+    color: #866739;
+    letter-spacing: 0.03em;
+    font-variant-numeric: tabular-nums;
+}
+
+.countdown-label {
+    margin-top: clamp(0.24rem, 1vw, 0.35rem);
+    font-family: "Ovo", Georgia, serif;
+    font-size: clamp(0.7rem, 2.75vw, 0.84rem);
+    color: #6e5a3a;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+}
+
+.countdown-complete {
+    margin: clamp(1rem, 3.8vw, 1.6rem) auto 0;
+    width: min(100%, 430px);
+    font-family: "Ovo", Georgia, serif;
+    font-size: clamp(0.86rem, 3.2vw, 1rem);
+    color: #866739;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+@media (min-width: 430px) {
+    .countdown-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: clamp(0.6rem, 1.9vw, 0.9rem);
+    }
+
+    .countdown-number {
+        font-size: clamp(1.8rem, 6.4vw, 2.45rem);
+    }
+}
+
+@media (min-width: 1025px) {
+    .countdown-section {
+        padding-top: 4.2rem;
+    }
+
+    .countdown-grid,
+    .countdown-subtitle,
+    .countdown-complete {
+        width: min(100%, 480px);
+    }
+}
+
+/* ============================================================
+   Venue section
+   ============================================================ */
+.venue-section {
+    max-width: none;
+    margin: 0;
+    padding: clamp(3.5rem, 9vw, 5rem) 1rem clamp(4.6rem, 10vw, 6.2rem);
+    text-align: center;
+    background: transparent;
+}
+
+.venue-section .section-heading {
+    margin-bottom: clamp(0.85rem, 3.5vw, 1.3rem);
+}
+
+.venue-content {
+    width: min(100%, 520px);
+    margin: 0 auto;
+    display: grid;
+    gap: clamp(1rem, 4vw, 1.6rem);
+}
+
+.venue-visual {
+    margin: 0;
+}
+
+.venue-visual img {
+    width: min(100%, 500px);
+    height: auto;
+    object-fit: contain;
+    object-position: center;
+    margin: 0 auto;
+    display: block;
+}
+
+.venue-copy {
+    width: min(100%, 460px);
+    margin: 0 auto;
+    display: grid;
+    gap: clamp(0.34rem, 1.4vw, 0.5rem);
+    place-items: center;
+}
+
+.venue-kicker {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    font-family: "Ovo", Georgia, serif;
+    font-size: clamp(0.72rem, 2.8vw, 0.9rem);
+    color: #7f6640;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+.venue-kicker__icon {
+    width: clamp(0.74rem, 2.7vw, 0.92rem);
+    height: auto;
+    opacity: 0.88;
+}
+
+.venue-copy h3 {
+    font-family: var(--font-cursive);
+    font-size: clamp(2rem, 8.8vw, 3rem);
+    font-weight: 400;
+    color: #866739;
+    letter-spacing: 0.015em;
+    line-height: 1.02;
+    margin-top: clamp(0.1rem, 0.5vw, 0.3rem);
+}
+
+.venue-location {
+    font-family: var(--font-display);
+    font-size: clamp(0.86rem, 3.2vw, 1.06rem);
+    color: #6e5a3a;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.venue-note {
+    font-family: "Ovo", Georgia, serif;
+    font-size: clamp(0.75rem, 2.95vw, 0.93rem);
+    line-height: 1.52;
+    color: #5f5037;
+    max-width: 30ch;
+}
+
+.venue-link {
+    font-family: var(--font-display);
+    font-size: clamp(0.9rem, 3.4vw, 1.06rem);
+    color: #866739;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(134, 103, 57, 0.42);
+    padding-bottom: 0.08rem;
+    transition: opacity 220ms ease;
+}
+
+.venue-link:hover,
+.venue-link:focus-visible {
+    opacity: 0.74;
+    outline: none;
+}
+
+@media (min-width: 1025px) {
+    .venue-content,
+    .venue-copy {
+        width: min(100%, 520px);
     }
 }
 
@@ -658,9 +864,7 @@ body.is-open .audio-toggle {
     }
 
     body.is-open .hero-names,
-    body.is-open .hero-divider,
-    body.is-open .hero-details,
-    body.is-open .hero-venue {
+    body.is-open .hero-divider {
         opacity: 1;
         transform: none;
     }

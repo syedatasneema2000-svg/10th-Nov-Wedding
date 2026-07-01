@@ -12,7 +12,7 @@
     <link rel="preload" href="assets/intro/wax-seal-gold.png" as="image" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=EB+Garamond:wght@400;500&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=EB+Garamond:wght@400;500&family=Ovo&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
@@ -69,14 +69,6 @@
                         aria-hidden="true"
                         onerror="this.src='assets/ornaments/divider-gold-flourish.png'"
                     />
-
-                    <div class="hero-details">
-                        <p class="hero-detail">10 Nov, 2026</p>
-                        <span class="hero-detail-sep" aria-hidden="true">&#x2E3B;</span>
-                        <p class="hero-detail">1900 hrs</p>
-                    </div>
-
-                    <p class="hero-venue">Senakunja, Dhaka Cantonment</p>
                 </div>
             </div>
         </section>
@@ -87,10 +79,9 @@
                 <h2 id="invitation-title">Wedding Invitation</h2>
                 <img
                     class="section-heading__divider"
-                    src="assets/ornaments/divider-gold-flourish.svg"
+                    src="assets/ornaments/line-divider2.png"
                     alt=""
                     aria-hidden="true"
-                    onerror="this.src='assets/ornaments/divider-gold-flourish.png'"
                 />
             </div>
 
@@ -111,10 +102,9 @@
 
                     <img
                         class="invitation-card__divider"
-                        src="assets/ornaments/divider-gold-flourish.svg"
+                        src="assets/ornaments/vector-divider.png"
                         alt=""
                         aria-hidden="true"
-                        onerror="this.src='assets/ornaments/divider-gold-flourish.png'"
                     />
 
                     <p class="invitation-parents">Dr. Syed Quamrul Huda &amp; Mrs. Nusrat Ara</p>
@@ -147,17 +137,90 @@
                     <div class="invitation-event">
                         <p class="invitation-event__line">10 Nov, 2026</p>
                         <p class="invitation-event__line">1900 hrs</p>
-                        <p class="invitation-event__line">Senakunja, Dhaka Cantonment</p>
+                        <p class="invitation-event__line invitation-event__venue">
+                            <span class="invitation-event__senakunja">Senakunja</span><br />
+                            <span class="invitation-event__cantonment">Dhaka Cantonment</span>
+                        </p>
                     </div>
                 </div>
             </article>
         </section>
 
-        <!-- Step 5+ : countdown -->
-        <section class="section section--countdown" aria-label="Countdown"></section>
+        <!-- Step 5 : countdown -->
+        <section id="countdown" class="countdown-section section reveal-on-scroll" aria-labelledby="countdown-title">
+            <div class="section-heading reveal-on-scroll">
+                <h2 id="countdown-title">Countdown</h2>
+                <img
+                    class="section-heading__divider"
+                    src="assets/ornaments/line-divider2.png"
+                    alt=""
+                    aria-hidden="true"
+                    onerror="this.src='assets/ornaments/divider-gold-flourish.svg'"
+                />
+            </div>
 
-        <!-- Step 6+ : venue -->
-        <section class="section section--venue" aria-label="Venue"></section>
+            <p class="countdown-subtitle reveal-on-scroll">Until We Celebrate</p>
+
+            <div class="countdown-grid reveal-on-scroll" role="timer" aria-live="polite" aria-atomic="true">
+                <div class="countdown-item">
+                    <span class="countdown-number" data-countdown-days>000</span>
+                    <span class="countdown-label">Days</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" data-countdown-hours>00</span>
+                    <span class="countdown-label">Hours</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" data-countdown-minutes>00</span>
+                    <span class="countdown-label">Minutes</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" data-countdown-seconds>00</span>
+                    <span class="countdown-label">Seconds</span>
+                </div>
+            </div>
+
+            <p class="countdown-complete" data-countdown-complete hidden>The celebration has begun</p>
+        </section>
+
+        <!-- Step 6 : venue -->
+        <section id="venue" class="venue-section section" aria-labelledby="venue-title">
+            <div class="section-heading reveal-on-scroll">
+                <h2 id="venue-title">Venue</h2>
+                <img
+                    class="section-heading__divider"
+                    src="assets/ornaments/line-divider2.png"
+                    alt=""
+                    aria-hidden="true"
+                    onerror="this.src='assets/ornaments/divider-gold-flourish.svg'"
+                />
+            </div>
+
+            <div class="venue-content reveal-on-scroll">
+                <figure class="venue-visual reveal-on-scroll">
+                    <img
+                        src="assets/venue/Senakunjo-1.png"
+                        alt="Senakunja venue illustration"
+                    />
+                </figure>
+
+                <div class="venue-copy reveal-on-scroll">
+                    <p class="venue-kicker">
+                        <img class="venue-kicker__icon" src="assets/ornaments/locator-pin-point.png" alt="" aria-hidden="true" />
+                        Wedding Ceremony
+                    </p>
+                    <h3>Senakunja</h3>
+                    <p class="venue-location">Dhaka Cantonment</p>
+                    <p class="venue-note">An elegant evening celebration beneath warm lights and blessings.</p>
+                    <a
+                        class="venue-link"
+                        href="https://www.google.com/maps/search/?api=1&query=Senakunja%20Dhaka%20Cantonment"
+                        target="_blank"
+                        rel="noopener"
+                    >View Location</a>
+                </div>
+            </div>
+        </section>
 
         <!-- Step 7+ : dress code -->
         <section class="section section--dress-code" aria-label="Dress code"></section>
